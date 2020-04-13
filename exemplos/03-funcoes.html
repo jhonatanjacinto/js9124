@@ -1,0 +1,35 @@
+<meta charset="utf-8">
+<h1>Funções</h1>
+<script>
+
+    // function declaration
+    mostrarMensagem();
+    function mostrarMensagem() {
+        console.log('Mostrando uma mensagem com function declaration');
+    }
+
+    // function expression 
+    // Obs.: NÃO TEM COMPORTAMENTO DE HOISTING
+    // mostrarOutraMensagem(); // dá pau
+    let mostrarOutraMensagem = function() {
+        console.log('Mostrando outra mensagem com function expression');
+    }
+    mostrarOutraMensagem();
+
+    // ES6 = Arrow Functions
+    // Obs.: NÃO TEM COMPORTAMENTO DE HOISTING
+    // mostrarOla(); // dá pau
+    let mostrarOla = () => {
+        console.log('Olá, pessoas!!!');
+    }
+    mostrarOla();
+
+    let mostrarOla2 = () => console.log('Olá, pessoas 2!!!');
+    mostrarOla2();
+
+    // Arrow function com parâmetro
+    // let mostrarMensagemComNome = (nome) => console.log('Olá, ' + nome + '!!!');
+    let mostrarMensagemComNome = nome => console.log('Olá, ' + nome + '!!!');
+    mostrarMensagemComNome('Marcos');
+
+</script>

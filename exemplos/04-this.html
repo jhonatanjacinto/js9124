@@ -1,0 +1,28 @@
+<meta charset="utf-8">
+<h1>O comando "this"</h1>
+<script>
+
+    "use strict";
+
+    // this = referencia o objeto do contexto em que ele é executado
+    console.log(this); // Window
+
+    function teste()
+    {
+        console.log("this dentro da função: ", this);
+    }
+
+    teste();
+
+    const obj1 = {
+        nome: "Mauro",
+        sobrenome: 'Oliveira',
+        mostrarNomeCompleto() {
+            // console.log(this);
+            console.log(this.nome + " " + this.sobrenome);
+        }
+    }
+
+    obj1.mostrarNomeCompleto();
+
+</script>

@@ -1,0 +1,19 @@
+<meta charset="utf-8">
+<h1>Salário Novo</h1>
+<button id="btnCalcular">
+    Calcular
+</button>
+<p id="mostrarResultado">
+
+</p>
+
+<script>
+
+    btnCalcular.onclick = function() {
+        let salarioAtual = Number(prompt("Informe seu salário atual:").replace(",", "."));
+        let bonus = Number(prompt("Informe o valor do seu bônus:").replace(",", "."));
+        let salarioFinal = salarioAtual + bonus;
+        mostrarResultado.innerHTML = ("Seu salário final é: R$ " + salarioFinal.toFixed(2));
+    }
+
+</script>
