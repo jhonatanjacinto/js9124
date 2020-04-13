@@ -1,0 +1,87 @@
+<meta charset="utf-8">
+<h1>JavaScript: var, let e const</h1>
+<script>
+
+    /*
+    *   "use strict" proibe:
+            1) o comando with;
+            2) omissão da palavra-chave var/let/const;
+            3) funções com parâmetros duplicados;
+            4) muda o comportamento da palavra-chave (this)
+    */
+    "use strict";
+
+    var a = 999;
+    if (true) {
+        var b = a;
+    }
+    console.log('b: ', b); // OK
+
+    function teste()
+    {
+        var c = b;
+        console.log('valor de c:', c); // OK
+    }
+    teste();
+    // console.log('tentando acessar o valor de c:', c); // ReferenceError: c não existe fora da função
+
+
+    // ES6: criação de variáveis com "let"
+    let d = 888;
+    if (true) {
+        let e = d;
+        console.log('valor de e:', e); // OK
+    }
+    // console.log('e: ', e); // ReferenceError
+
+    // looping com "var"
+    for (var f = 1; f <= 5; f++) 
+    {
+        console.log('f:', f);
+    }
+    console.log('f fora do looping: ', f); // 6
+
+    // looping com "let"
+    for (let g = 1; g <= 5; g++)
+    {
+        console.log('g: ', g);
+    }
+    // console.log('g fora do looping: ', g); // ReferenceError
+
+
+    // Constantes
+    const x = 0;
+    // x = 2; // TypeError = atribuição inválida
+    const lista = [12, 'Olá', true, 5.88];
+    console.log('lista: ', lista);
+    lista.push('Pedro');
+    lista.unshift('Cachorro');
+    lista.splice(3, 1);
+    console.log('lista:', lista);
+    // lista = ""; // TypeError
+
+    // Objetos em JavaScript
+    const pessoa = {
+        nome: "Fabiana", // propriedades do objeto
+        sobrenome: "Gomes",
+        idade: 48,
+        // método do objeto (comportamento)
+        dizerOla() {
+            let mensagem = "Olá, pessoal meu nome é Fabiana!";
+            alert(mensagem);
+        }
+    }
+
+    pessoa.nome = "Henrique"; // Ok alteração de valores de propriedades
+    pessoa.cidade = "Barueri"; // OK a criação de novas propriedades
+    // pessoa = {} // TypeError
+
+    console.log(pessoa);
+
+    console.log('Nome da pessoa: ', pessoa.nome);
+    console.log('Idade da pessoa: ', pessoa.idade);
+    pessoa.dizerOla();
+
+
+
+</script>
