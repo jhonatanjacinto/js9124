@@ -1,0 +1,57 @@
+<meta charset="utf-8">
+<h1>High-Order Function</h1>
+<script>
+
+    // High-Order Function é aquela que recebe como parâmetro outra função e/ou que 
+    // retorna uma função como resultado do seu processamento.
+    
+    const clientes = [
+        { nome: 'Paulo Martins', idade: 26, sexo: 'M', renda: 3500 },
+        { nome: 'Maria da Silva', idade: 32, sexo: 'F', renda: 4800 },
+        { nome: 'José Pereira', idade: 52, sexo: 'M', renda: 1800 },
+        { nome: 'Carlos Bragança', idade: 28, sexo: 'M', renda: 2880 },
+        { nome: 'Fernanda Vaz', idade: 21, sexo: 'F', renda: 1600 },
+        { nome: 'Josy Vasconcelos', idade: 30, sexo: 'F', renda: 3200 }
+    ];
+
+    console.log('Clientes Original: ', clientes);
+
+    // forEach() é uma função que percorre itens de um Array
+    clientes.forEach(item => console.log(item.nome));
+
+    // filter() = filtra os itens de um array com base numa condição especificada na função de callback
+    /* 
+    const homens = clientes.filter(function(cliente) {
+        return cliente.sexo === 'M';
+    });
+    */
+    const homens = clientes.filter(cliente => cliente.sexo === 'M');
+    console.log('Homens: ', homens);
+
+    // find() = busca o primeiro item da lista que atenda a condição especificada
+    const mulherMais30 = clientes.find(cliente => cliente.sexo === 'F' && cliente.idade > 30);
+    console.log('Mulher +30: ', mulherMais30);
+
+    // findIndex() = busca e retorna a posição do item da lista que atenda a condição especificada
+    const posicaoMulher = clientes.findIndex(cliente => cliente.sexo === 'F' && cliente.idade > 30);
+    console.log('Posição Mulher +30: ', posicaoMulher);
+
+    // sort() = ordena os itens de um array. Por padrão, ele ordena de forma alphanumérica 
+    // (ordem do dicionário), porém aceita uma função callback que estabeleça as condições de ordenação
+    // clientes.sort((cliente1, cliente2) => cliente1.idade - cliente2.idade);
+    // console.log('Clientes ordenados por idade:', clientes);
+
+    clientes.sort((cliente1, cliente2) => cliente1.nome.localeCompare(cliente2.nome));
+    console.log('Clientes ordenados por nome: ', clientes);
+
+    // reduce() = reduz os valores de um array a um valor único
+    let total = clientes.reduce((acumulador, cliente) => acumulador + cliente.renda, 0);
+    console.log('Total das rendas: ', total);
+
+    // map() = transforma um array de um tipo em um array em outro
+    const idades = clientes.map(cliente => cliente.idade);
+    console.log('Lista de Idades dos Clientes: ', idades);
+
+
+
+</script>

@@ -1,0 +1,66 @@
+<meta charset="utf-8">
+<h1>Lista de Compras</h1>
+<p>
+    Use o formulário abaixo para criar sua lista de compras:
+</p>
+Nome do item: <br>
+<input type="text" id="campoItem">
+<button id="btnAdicionar">
+    Adicionar
+</button>
+<button id="btnExcluir">
+    Excluir
+</button>
+<button id="btnCrescente">
+    Ordenar de Forma Crescente
+</button>
+<button id="btnDecrescente">
+    Ordenar de Forma Decrescente
+</button>
+<p id="mostrador">
+    Sua lista de compras está vazia no momento :/
+</p>
+
+
+<script>
+
+    const listaCompras = [];
+
+    btnAdicionar.onclick = () => {
+        let item = campoItem.value.trim();
+
+        if (item == '' || isNaN(item) === false) {
+            alert('Por favor, preencha o item com um valor válido!');
+        }
+        else {
+            listaCompras.push(item);
+            exibirListaCompras();
+        }
+
+        campoItem.value = '';
+        campoItem.focus();
+    }
+
+    btnCrescente.onclick = () => {
+        listaCompras.sort((item1, item2) => item1.localeCompare(item2));
+        exibirListaCompras();
+    }
+
+    btnDecrescente.onclick = () => {
+        listaCompras.sort((item1, item2) => item1.localeCompare(item2)).reverse();
+        exibirListaCompras();
+    }
+
+    function exibirListaCompras()
+    {
+        mostrador.innerHTML = `
+            Sua lista de compras tem ${listaCompras.length} item(ns). Eles são: <br>
+            <ul>
+                <li>
+                ${listaCompras.join('</li><li>')}
+                </li>
+            </ul>
+        `;
+    }
+
+</script>
