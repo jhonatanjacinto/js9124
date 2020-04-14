@@ -1,0 +1,21 @@
+<meta charset="utf-8">
+<h1>Parâmetros Rest</h1>
+
+<script>
+
+
+    // parâmetros rest sempre geram um ARRAY com os dados recebidos
+    function exibirNomes(...nomes)
+    {
+        console.log(nomes.join(', '));
+    }
+
+    exibirNomes('Adriana', 'Roberto', 'Mateus', 'Stéphany', 'Danilo', 'Valéria', 'Josy');
+
+    let animais = [];
+    // push() é uma função com parâmetro rest
+    animais.push("Girafa", "Leão", "Onça", "Javali");
+    console.log(animais);
+
+
+</script>
