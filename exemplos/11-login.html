@@ -1,0 +1,68 @@
+<meta charset="utf-8">
+<h1>Login</h1>
+
+Usuário: <br>
+<input type="text" id="campoUsuario">
+<br><br>
+
+Senha: <br>
+<input type="password" id="campoSenha">
+<br><br>
+
+<input type="checkbox" id="campoMeManterLogado" checked> Mantenha-me logado 
+<br><br>
+
+<button id="btnLogar">
+    Entrar
+</button>
+
+<script>
+
+    btnLogar.onclick = () => {
+        let usuario = campoUsuario.value;
+        let senha = campoSenha.value;
+        let manterLogado = campoMeManterLogado.checked;
+
+        if (usuario == 'caelum' && senha == 'js12') 
+        {
+            if (manterLogado == true) {
+                // localStorage
+                localStorage.setItem('usuarioLogado', usuario);
+            }
+            else {
+                // sessionStorage
+                sessionStorage.setItem('usuarioLogado', usuario);
+            }
+
+            // exibir informações do usuário logado
+            mostrarUsuarioLogado();
+        }
+        else {
+            alert('Dados de Login incorretos!');
+        }
+    }
+
+    mostrarUsuarioLogado();
+
+    function mostrarUsuarioLogado()
+    {
+        let usuario = sessionStorage.getItem('usuarioLogado') || localStorage.getItem('usuarioLogado');
+        if (usuario) 
+        {
+            document.body.innerHTML = (`
+                Você está logado! Usuário: ${usuario}.
+                <button onclick="logout()">
+                   Sair
+                </button>
+            `);
+        }
+    }
+
+    function logout()
+    {
+        sessionStorage.removeItem('usuarioLogado');
+        localStorage.removeItem('usuarioLogado');
+        window.location.reload(); // recarrega a página
+    }
+
+</script>

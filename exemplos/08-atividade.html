@@ -1,0 +1,104 @@
+<meta charset="utf-8">
+<h1>Exercício - High-Order Functions</h1>
+<button id="btn1">
+    Exibir todos os nomes dos produtos
+</button>
+
+<button id="btn2">
+    Exibir todos os produtos do departamento "Móveis"
+</button>
+
+<button id="btn3">
+    Exibir todos os produtos cujo preço seja maior que R$ 300 e esteja em estoque 
+</button>
+
+<button id="btn4">
+    Exibir a soma de todos os preços dos produtos
+</button>
+
+<button id="btn5">
+    Exibir a soma de todos os preços dos produtos de "Informática"
+</button>
+
+<button id="btn6">
+    Exibir por preço crescente todos os produtos 
+</button>
+
+<button id="btn7">
+    Exibir por preço decrescente todos os produtos de "Eletroportáteis"
+</button>
+
+<button id="btn8">
+    Exibir o primeiro produto cujo preço seja maior que R$ 800
+</button>
+
+<script>
+
+const listaProdutos = [
+    { nome: "Cama Box Casal", preco: 530.75, departamento: "Móveis", emEstoque: true },
+    { nome: "Armário de Cozinha", preco: 267.00, departamento: "Móveis", emEstoque: true },
+    { nome: "Colchão Casal Queen-size", preco: 352.85, departamento: "Móveis", emEstoque: false },
+    { nome: "Cama Box Casal", preco: 530.75, departamento: "Móveis", emEstoque: true },
+    { nome: "Mesa para Escritório", preco: 180.00, departamento: "Móveis", emEstoque: true },
+    { nome: "Batedeira", preco: 172.50, departamento: "Eletroportáteis", emEstoque: true },
+    { nome: "Liquidificador", preco: 87.99, departamento: "Eletroportáteis", emEstoque: true },
+    { nome: "Forno Elétrico", preco: 235.00, departamento: "Eletroportáteis", emEstoque: true },
+    { nome: "HD Externo Samsung", preco: 875.65, departamento: "Informática", emEstoque: false },
+    { nome: "Notebook Dell 15'", preco: 2578.75, departamento: "Informática", emEstoque: true },
+    { nome: "Kit Mouse e Teclado Microsoft", preco: 359.00, departamento: "Informática", emEstoque: true },
+    { nome: "Monitor LG 24'", preco: 978.85, departamento: "Informática", emEstoque: false },
+    { nome: "Impressora Canon", preco: 652.75, departamento: "Informática", emEstoque: true },
+    { nome: "Capa para notebook 13'", preco: 63.00, departamento: "Informática", emEstoque: true },
+    { nome: "Monitor Samsung 27'", preco: 1450.35, departamento: "Informática", emEstoque: false },
+];
+
+// botão 1
+btn1.onclick = () => {
+    listaProdutos.forEach(item => console.log(item.nome));
+}
+
+// botão 2
+btn2.onclick = () => {
+    const produtos = listaProdutos.filter(produto => produto.departamento === 'Móveis');
+    console.log(produtos);
+}
+
+// botão 3 
+btn3.onclick = () => {
+    const produtos = listaProdutos.filter(produto => produto.preco > 300 && produto.emEstoque === true);
+    console.log(produtos);
+}
+
+// botão 4
+btn4.onclick = () => {
+    let total = listaProdutos.reduce((acumulador, item) => acumulador + item.preco, 0);
+    console.log('Soma dos preços: ', total);
+}
+
+// botão 5
+btn5.onclick = () => {
+    const informatica = listaProdutos.filter(item => item.departamento === 'Informática');
+    let total = informatica.reduce((acumulador, item) => acumulador + item.preco, 0);
+    console.log('Soma dos preços de informática: ', total);
+}
+
+// botão 6
+btn6.onclick = () => {
+    listaProdutos.sort((item1, item2) => item1.preco - item2.preco);
+    console.log(listaProdutos);
+}
+
+// botão 7
+btn7.onclick = () => {
+    const eletroportateis = listaProdutos.filter(produto => produto.departamento === 'Eletroportáteis');
+    eletroportateis.sort((item1, item2) => item1.preco - item2.preco).reverse();
+    console.log(eletroportateis);
+}
+
+// botão 8
+btn8.onclick = () => {
+    const produto800 = listaProdutos.find(produto => produto.preco > 800);
+    console.log(produto800);
+}
+
+</script>

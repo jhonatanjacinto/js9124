@@ -1,0 +1,49 @@
+<meta charset="utf-8">
+<h1>Destructuring Assigment / Atribuição por Desestruturação</h1>
+<script>
+
+    // Atribuição com uso de array
+    let a = 0;
+    let b = 2;
+
+    [a, b] = [b, a];// a = 2 e b = 0
+
+    console.log('a: ', a);
+    console.log('b: ', b);
+
+    // atribuição múltipla
+    let [c, d, e] = [5, "Jhonatan", true];
+
+    // desestruturando valores de um array
+    const valores = [1, 2, 3, 4, 5, 6];
+    let [um, dois, tres, , , seis] = valores;
+    console.log(um, dois, tres, seis);
+    console.log(valores);
+
+    const animais = ["Gato", "Rato", "Cobra", "Girafa", "Pato", "Ganso", "Onça", "Lince"];
+    let [a1, a2, a3, a4, ...outros] = animais;
+    console.log(a1, a2, a3, a4, outros);
+
+    // Desestruturação de objetos
+    const carro = {
+        marca: 'Chevrolet',
+        nome: 'Prisma',
+        tipo: 'LTZ',
+        cambio: 'Automático',
+        preco: 59500,
+        combustivel: 'Flex'
+    }
+
+    let { marca, preco, combustivel } = carro;
+
+    console.log('Marca: ', marca);
+    console.log('Preço: ', preco);
+    console.log('Combustível: ', combustivel);
+    console.log(carro);
+
+    // atribuição a variáveis com nomes diferentes
+    let { tipo: type } = carro;
+    console.log('Tipo: ', type);
+    
+
+</script>

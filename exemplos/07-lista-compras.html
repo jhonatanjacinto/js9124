@@ -28,9 +28,15 @@ Nome do item: <br>
 
     btnAdicionar.onclick = () => {
         let item = campoItem.value.trim();
+        let posicao = listaCompras.findIndex(itemDaLista => itemDaLista.localeCompare(item, undefined, { sensitivity: 'base' }) === 0);
 
         if (item == '' || isNaN(item) === false) {
             alert('Por favor, preencha o item com um valor válido!');
+        }
+        else if (posicao >= 0) {
+            // realiza a atualização do item encontrado na lista
+            listaCompras[posicao] = item;
+            exibirListaCompras();
         }
         else {
             listaCompras.push(item);
@@ -39,6 +45,19 @@ Nome do item: <br>
 
         campoItem.value = '';
         campoItem.focus();
+    }
+
+    btnExcluir.onclick = () => {
+        let item = campoItem.value.trim();
+        let posicao = listaCompras.findIndex(itemDaLista => itemDaLista.localeCompare(item, undefined, {sensitivity: 'base'}) === 0);
+
+        if (posicao >= 0) {
+            listaCompras.splice(posicao, 1);
+            exibirListaCompras();
+        }
+        else {
+            alert('Item não encontrado na lista de compras!');
+        }
     }
 
     btnCrescente.onclick = () => {
@@ -55,11 +74,11 @@ Nome do item: <br>
     {
         mostrador.innerHTML = `
             Sua lista de compras tem ${listaCompras.length} item(ns). Eles são: <br>
-            <ul>
+            <ol>
                 <li>
                 ${listaCompras.join('</li><li>')}
                 </li>
-            </ul>
+            </ol>
         `;
     }
 

@@ -1,0 +1,45 @@
+<meta charset="utf-8">
+<h1>Temas</h1>
+<select id="seletorTemas">
+    <option value="">Selecione seu Tema</option>
+    <option value="tema-vermelho">Vermelho</option>
+    <option value="tema-verde">Verde</option>
+</select>
+
+<p>Aqui é o seu site com a possibilidade de trocar temas... :)</p>
+<style>
+
+    body {
+        padding: 26px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body.tema-vermelho {
+        background-color: red;
+        color: #fff;
+    }
+
+    body.tema-verde {
+        background-color: green;
+        color: yellow;
+    }
+
+</style>
+
+<script>
+
+    let tema = localStorage.getItem('temaEscolhido');
+
+    if (tema) {
+        document.body.classList = tema;
+    }
+
+    seletorTemas.onchange = () => {
+        console.log('tema escolhido: ', seletorTemas.value);
+        localStorage.setItem('temaEscolhido', seletorTemas.value);
+        document.body.classList = seletorTemas.value;
+        // alert('Tema salvo com sucesso!');
+    }
+
+
+</script>
