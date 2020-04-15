@@ -1,0 +1,42 @@
+<meta charset="utf-8">
+<h1>Herança com ES5</h1>
+<script>
+
+    /* Função Construtoras e Herança com Prototipagem / ES5 */
+    function Livro(titulo, descritivo, autor, isbn, preco)
+    {
+        this.titulo = titulo;
+        this.descritivo = descritivo;
+        this.autor = autor;
+        this.isbn = isbn;
+        this.preco = preco;
+    }
+
+    Livro.prototype.getCustoImposto = function() {
+        return this.preco * 0.065; /* 6,5% */
+    }
+
+    Livro.prototype.getDesconto = function() {
+        return this.preco * 0.10;
+    }
+
+    /* Ebook herdando as características de Livro */
+    function Ebook(titulo, descritivo, autor, isbn, preco, marcaDagua)
+    {
+        Livro.call(this, titulo, descritivo, autor, isbn, preco);
+        this.marcaDagua = marcaDagua;
+    }
+
+    Ebook.prototype = Object.create(Livro.prototype);
+    Ebook.prototype.constructor = Ebook;
+    /* sobrescreve o método getCustoImposto da classe Livro original (classe-pai) */
+    Ebook.prototype.getCustoImposto = function() {
+        return this.preco * 0.02; /* 2% */
+    }
+
+    /* Instâncias */
+    const livro2 = new Livro("Guerra dos Tronos", "Bla bla bla", "Martin", "iopYHkj", 100.00);
+    const livro3 = new Ebook("PHP para leigos", "Blo blo blo", "Jeferson Gomes", "ksajdo", 100.00, "Marca D'água do E-book");
+
+
+</script>

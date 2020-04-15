@@ -1,0 +1,53 @@
+<meta charset="utf-8">
+<h1>Funções Construtoras</h1>
+
+<script>
+
+    /* Objeto Literal */
+    const carroFake = {
+        marca: "Fiat",
+        modelo: "Punto"
+    }
+
+    /* Função construtora de objetos do tipo "Carro" */
+    function Carro(marca, modelo, ano, chassi)
+    {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.ano = ano;
+        this.opcionais = [];
+        this.chassi = chassi;
+        // método fica dentro do objeto
+        /*this.andar = () => {
+            console.log('Acelerandooo... vrum...');
+        }*/
+    }
+
+    Carro.prototype.andar = () => {
+        console.log('Acelerandooo... vrum...');
+    }
+
+    const carro1 = new Carro('Volkswagen', 'Polo', 2017);
+    const carro2 = new Carro('Chevrolet', 'Sonic', 2018);
+    const carro3 = new Carro('Chevrolet', 'Chevette', 1995);
+    cadastrarCarro(carro1); // Ok
+    cadastrarCarro(carro2); // OK
+    cadastrarCarro(carroFake); // Não passa na validação
+
+    // cadastrarCarro(15828); // dá pau porque number não é um object
+    // cadastrarCarro("Testando meu carro"); // dá pau porque string não é um object
+
+    function cadastrarCarro(carro)
+    {
+        if (carro instanceof Carro === false) {
+            throw new Error('O carro informado é inválido!!!');
+        }
+
+        console.log('Cadastrando o carro...');
+        console.log('Marca: ', carro.marca);
+        console.log('Modelo: ', carro.modelo);
+        console.log('Ano: ', carro.ano);
+        carro.andar();
+    }
+
+</script>

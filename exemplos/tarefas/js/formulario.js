@@ -1,3 +1,5 @@
+import { adicionarTarefa } from "./tarefas.js";
+import { exibirTarefas } from "./exibidor.js";
 
 btnAdicionar.onclick = () => {
     let tarefa = campoTarefa.value.trim();
@@ -7,8 +9,9 @@ btnAdicionar.onclick = () => {
     }
     else {
         // adicionar a tarefa digitada na lista de tarefas
-        
-        // exibir a lista de tarefas
+        adicionarTarefa(tarefa);
+        // exibir as tarefas pro usuário
+        exibirTarefas();
     }
 
     campoTarefa.value = '';

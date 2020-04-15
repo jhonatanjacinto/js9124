@@ -1,0 +1,38 @@
+<meta charset="utf-8">
+<h1>Herança com Classes ES6</h1>
+<script>
+
+    class Livro {
+        constructor(titulo, descritivo, autor, isbn, preco) {
+            this.titulo = titulo;
+            this.descritivo = descritivo;
+            this.autor = autor;
+            this.isbn = isbn;
+            this.preco = preco;
+        }
+
+        getCustoImposto() {
+            return this.preco * 0.065;
+        }
+
+        getDesconto() {
+            return this.preco * 0.10;
+        }
+    }
+
+    class Ebook extends Livro {
+        constructor() {
+            super(); // chama o construtor da classe-pai
+            this.marcaDagua = undefined;
+        }
+
+        getCustoImposto() {
+            return this.preco * 0.02;
+        }
+    }
+
+    /* Instâncias */
+    const livro1 = new Livro("Guerra dos Tronos", "Bla bla bla", "Martin", "iopYHkj", 100.00);
+    const livro2 = new Ebook();
+
+</script>
