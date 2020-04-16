@@ -1,6 +1,10 @@
 import { Produto } from "../model/Produto.js";
 
-const listaProdutos = [];
+const listaProdutos = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+listaProdutos.forEach((produto, indice) => {
+    listaProdutos[indice] = Object.assign(new Produto, produto);
+});
 
 /**
  * Função que adiciona um produto no Carrinho de Compras
@@ -28,11 +32,11 @@ export function adicionarProduto(nome, preco, quantidade)
 
     // se tiver mensagens de erro para serem exibidas, mostramos todas de uma vez...
     if (mensagensErro.length > 0) {
-        throw new Error( `\n${mensagensErro.join("\n")}` );
+        throw new Error(`${mensagensErro.join("\n")}`);
     }
 
     listaProdutos.push(produto);
-    console.log('Produtos no Carrinho: ', listaProdutos);
+    localStorage.setItem('carrinho', JSON.stringify(listaProdutos));
 }
 
 /**
@@ -42,7 +46,13 @@ export function adicionarProduto(nome, preco, quantidade)
  */
 export function removerProduto(posicao)
 {
-
+    if (posicao < 0 || posicao >= listaProdutos.length) {
+        throw new Error('Posição informada para remoção é inválida!');
+    }
+    else {
+        listaProdutos.splice(posicao, 1);
+        localStorage.setItem('carrinho', JSON.stringify(listaProdutos));
+    }
 }
 
 /**
@@ -60,5 +70,14 @@ export function getProdutos()
  */
 export function getTotalCompra()
 {
+    return listaProdutos.reduce((acumulador, produto) => acumulador + produto.getTotal(), 0);
+}
 
+/**
+ * Retorna a quantidade total de itens adicionados ao carrinho de compras
+ * @returns {number}
+ */
+export function getTotalQuantidade()
+{
+    return listaProdutos.reduce((acumulador, produto) => acumulador + produto.quantidade, 0);
 }
