@@ -13,9 +13,10 @@ export class Pedido {
         this.estado = null;
         this.observacoes = null;
         this.produtos = [];
+        this.status = 1; // 1 = EM ANDAMENTO | 2 = ATENDIDO
     }
 
     getTotal() {
-        
+        return this.produtos.reduce((acumulador, produto) => acumulador + produto.getSubtotal(), 0);
     }
 }

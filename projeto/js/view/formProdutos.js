@@ -1,4 +1,32 @@
 import { formataMoeda } from "../utils/formataMoeda.js";
+import { adicionarProduto } from "../controller/PedidoController.js";
+import { exibirProdutosPedido } from "./tabelaSeusProdutos.js";
+
+$btnAdicionarProduto.onclick = () => {
+    try 
+    {
+        // coleta os dados do formulário
+        let indiceSelecionado = $selectProduto.selectedIndex;
+        let nome = $selectProduto.value;
+        let preco = Number($selectProduto.options[indiceSelecionado].dataset.preco);
+        let foto = $selectProduto.options[indiceSelecionado].dataset.foto;
+        let quantidade = parseInt($inputQuantidade.value);
+
+        // passa os dados pro controller adicionar ao pedido
+        adicionarProduto(nome, preco, quantidade, foto);
+        // exibe os dados do pedido na tabela
+        exibirProdutosPedido();
+
+        // limpa os campos do formulário
+        $selectProduto.value = 0;
+        $inputQuantidade.value = 1;
+    }
+    catch(erro) {
+        alert(erro.message);
+        console.error(erro);
+    }
+}
+
 
 carregarProdutos();
 async function carregarProdutos()
@@ -25,3 +53,4 @@ async function carregarProdutos()
         console.error(erro);
     }
 }
+

@@ -30,8 +30,40 @@ const app = http.createServer((request, response) => {
     }
 
     /* @url /status-pedido?codigo=CODIGO_PEDIDO : retornar o status do pedido para o código enviado */
+    if (pathname === '/status-pedido')
+    {
+        let stringCodigo = url.parse(request.url, true).query.codigo;
+        const pedidosString = fs.readFileSync('./db/pedidos.json', 'utf8');
+        const listaDePedidos = JSON.parse(pedidosString);
+
+        const pedidoEncontrado = listaDePedidos.find(pedido => pedido.id == stringCodigo);
+        if (pedidoEncontrado) {
+            const dadosResposta = JSON.stringify({ statusDoPedido : pedidoEncontrado.status });
+            response.end(dadosResposta);
+        }
+        else {
+            // statusDoPedido = 0 | Pedido não existe na base de dados
+            const dadosResposta = JSON.stringify({ statusDoPedido : 0 });
+            response.end(dadosResposta);
+        }
+    }
 
     /* @url /salvar-pedido?pedido=DADOS_PEDIDO : salva as informações do pedido no servidor */
+    if (pathname === '/salvar-pedido')
+    {
+        let stringDadosPedido = url.parse(request.url, true).query.pedido;
+        const pedidosJson = fs.readFileSync('./db/pedidos.json', 'utf8');
+        const listaDePedidos = JSON.parse(pedidosJson);
+        const dadosPedido = JSON.parse(stringDadosPedido);
+
+        listaDePedidos.push(dadosPedido);
+        const stringPedidosJson = JSON.stringify(listaDePedidos);
+
+        fs.writeFileSync('./db/pedidos.json', stringPedidosJson, 'utf8');
+
+        const resposta = { mensagem: 'Pedido salvo com sucesso!' };
+        response.end(JSON.stringify(resposta));
+    }
 
 });
 
