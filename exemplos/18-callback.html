@@ -1,0 +1,54 @@
+<meta charset="utf-8">
+<h1>Callbacks</h1>
+<button id="btnReserva">
+    Fazer reserva de assento
+</button>
+<p id="mostrador"></p>
+
+<script>
+
+    function conectarNoBancoDeDados(callback)
+    {
+        mostrador.innerHTML = "Conectando no banco de dados...";
+        setTimeout(() => {
+            alert("Conexão realizada com sucesso!");
+            callback(); // executa a função callback passada pra função
+        }, 3000)
+    }
+
+    function buscarListaAssentos(callback) {
+        mostrador.innerHTML = "Buscando lista de assentos disponíveis...";
+        setTimeout(() => {
+            alert("Pronto! Há 20 assentos disponíveis...");
+            callback();
+        }, 5000);
+    }
+
+    function registrarAssento(callback) {
+        mostrador.innerHTML = "Registrando o assento 25...";
+        setTimeout(() => {
+            alert("Legal! Assento 25 registrado com sucesso...");
+            callback();
+        }, 4000);
+    }
+
+    function realizarPagamento(callback) {
+        mostrador.innerHTML = "Processando o pagamento...";
+        setTimeout(() => {
+            alert("Pagamento autorizado com sucesso...");
+            callback();
+        }, 3000);
+    }
+
+    // Callback-Hell
+    conectarNoBancoDeDados(function() {
+        buscarListaAssentos(function() {
+            registrarAssento(function() {
+                realizarPagamento(function() {
+                    mostrador.innerHTML = "Pronto! Processo realizado com sucesso. Obrigado!";
+                });
+            });
+        });
+    });
+
+</script>
