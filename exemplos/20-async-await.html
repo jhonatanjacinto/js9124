@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<h1>Promises</h1>
+<h1>Promises com Async/Await</h1>
 <p id="mostrador"></p>
 
 <script>
@@ -30,7 +30,7 @@
             mostrador.innerHTML = "Registrando o assento 25...";
             setTimeout(() => {
                 // qualquer erro na promise.. vai pro catch()
-                throw new Error("Não foi possível registra o assento solicitado!!!");
+                // throw new Error("Não foi possível registra o assento solicitado!!!");
                 alert("Legal! Assento 25 registrado com sucesso...");
                 resolve();
             }, 4000);
@@ -47,15 +47,22 @@
         });
     }
 
-    // Processamento assíncrono com Promises
-    conectarNoBancoDeDados()
-        .then(() => buscarListaAssentos())
-        .then(() => registrarAssento())
-        .then(() => realizarPagamento())
-        .then(() => mostrador.innerHTML = "Processamento finalizado com sucesso! Obrigado.")
-        .catch((erro) => {
+    // Processamento assíncrono com Promises e Async/Await
+    async function processarPassos()
+    {
+        try {
+            await conectarNoBancoDeDados();
+            await buscarListaAssentos();
+            await registrarAssento();
+            await realizarPagamento();
+            mostrador.innerHTML = "Processamento realizado com sucesso!";
+        }
+        catch(erro) {
             alert(erro);
             console.error(erro);
-        });
+        }
+    }
+
+    processarPassos();
 
 </script>

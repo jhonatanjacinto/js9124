@@ -1,0 +1,28 @@
+<meta charset="utf-8">
+<h1>Ajax com Promises - API Fetch</h1>
+<button id="btnCarregar">
+    Carregar Conteúdo
+</button>
+<button onclick="alert('Mensagem simples de teste')">
+    Teste do Alerta
+</button>
+<div id="conteudoCarregado">
+    O conteúdo carregado pelo ajax será mostrado aqui...
+</div>
+
+<script>
+
+    btnCarregar.onclick = async function() {
+        try {
+            const resposta = await fetch('https://caelum.jhonatanjacinto.dev/teste.php');
+            const htmlCarregado = await resposta.text();
+            conteudoCarregado.innerHTML = htmlCarregado;
+            console.log('Dados carregados com sucesso!');
+        }
+        catch(erro) {
+            alert('Deu ruim');
+            console.error(erro);
+        }
+    }
+
+</script>

@@ -1,0 +1,29 @@
+<meta charset="utf-8">
+<h1>Ajax com JavaScript</h1>
+<button id="btnCarregar">
+    Carregar Conteúdo
+</button>
+<button onclick="alert('Mensagem simples de teste')">
+    Teste do Alerta
+</button>
+<div id="conteudoCarregado">
+    O conteúdo carregado pelo ajax será mostrado aqui...
+</div>
+
+<script>
+
+    btnCarregar.onclick = function() {
+        const ajax = new XMLHttpRequest();
+        ajax.open('GET', 'https://caelum.jhonatanjacinto.dev/teste.php', true);
+        ajax.send();
+        ajax.onload = function() {
+            conteudoCarregado.innerHTML = ajax.response;
+            console.log('Dados carregados com sucesso!');
+        }
+        ajax.onerror = function(erro) {
+            alert('Deu ruim!!!');
+            console.error(erro);
+        }
+    }
+
+</script>
